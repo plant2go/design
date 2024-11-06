@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-22.04
     env:
       INPUTPATH: .
-      OUTPUTPATH: dist
+      OUTPUTPATH: .
       SLIDES: false
       BRANCH: gh-pages
     concurrency: ci-${{ github.ref }}
