@@ -1,0 +1,34 @@
+name: Docs
+
+on:
+  push:
+    branches:
+      - 'main'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build & Publish 🚀
+    runs-on: ubuntu-22.04
+    env:
+      OUTPUTPATH: dist
+      SLIDES: false
+      BRANCH: gh-pages
+    concurrency: ci-${{ github.ref }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build main
+        uses: quirinecker/asciidoctor-convert-action@main
+        with:
+          slides: ${{ env.SLIDES }}
+          outputPath: ${{ env.OUTPUTPATH }}
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ${{ env.OUTPUTPATH }}
+          branch: ${{ env.BRANCH }}
