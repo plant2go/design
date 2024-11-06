@@ -39,7 +39,7 @@ jobs:
 
       - name: see folder
         run: |
-          ls -lah
+          tree .
           
 
       - name: Deploy 🚀
