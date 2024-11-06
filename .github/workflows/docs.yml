@@ -32,7 +32,7 @@ jobs:
       - name: see if soffice is installed
         run: |
           sudo apt-get install unoconv
-          cd ./Presentation Template/
+          cd presentation-template
           unoconv -f pdf Plant2Go_PresentationTemplate.pptx
 #          cd ../praesentation/
 #          unoconv -f pdf Plant2Go_Presentation_07112024.pptx
