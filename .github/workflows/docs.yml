@@ -37,6 +37,11 @@ jobs:
           sudo apt-get install unoconv
           cd praesentation
           unoconv -f pdf Plant2Go_Presentation_07112024.pptx
+      - name: convert Plant2Go.docx to PDF
+        run: |
+          sudo apt-get install unoconv
+          cd dokumentation-logoerstellung
+          unoconv -f pdf Plant2Go.docx
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
