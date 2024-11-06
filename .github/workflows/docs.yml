@@ -37,7 +37,7 @@ jobs:
     name: convert Plant2Go_PresentationTemplate.pptx to PDF
     runs-on: ubuntu-22.04
     concurrency: ci-${{ github.ref }}
-    needs: checkout
+    needs: adoc
     steps:
       - name: convert Plant2Go_PresentationTemplate.pptx to PDF
         run: |
@@ -49,7 +49,7 @@ jobs:
     name: convert Plant2Go_Presentation_07112024.pptx to PDF
     runs-on: ubuntu-22.04
     concurrency: ci-${{ github.ref }}
-    needs: checkout
+    needs: presentation-template
     steps:
       - name: convert Plant2Go_Presentation_07112024.pptx to PDF
         run: |
