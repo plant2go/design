@@ -29,6 +29,10 @@ jobs:
           inputPath: ${{ env.INPUTPATH }}
           outputPath: ${{ env.OUTPUTPATH }}
 
+      - name: see if soffice is installed
+        run: |
+          soffice
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
