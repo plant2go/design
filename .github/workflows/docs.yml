@@ -22,12 +22,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build main
-        uses: quirinecker/asciidoctor-convert-action@main
-        with:
-          slides: ${{ env.SLIDES }}
-          inputPath: ${{ env.INPUTPATH }}
-          outputPath: ${{ env.OUTPUTPATH }}
+#      - name: Build main
+#        uses: quirinecker/asciidoctor-convert-action@main
+#        with:
+#          slides: ${{ env.SLIDES }}
+#          inputPath: ${{ env.INPUTPATH }}
+#          outputPath: ${{ env.OUTPUTPATH }}
 
       - name: see if soffice is installed
         run: |
