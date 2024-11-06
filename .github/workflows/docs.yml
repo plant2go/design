@@ -32,7 +32,15 @@ jobs:
       - name: see if soffice is installed
         run: |
           sudo apt-get install unoconv
-          unoconv
+          cd ./Presentation Template/
+          unoconv -f pdf Plant2Go_PresentationTemplate.pptx
+          cd ../praesentation/
+          unoconv -f pdf Plant2Go_Presentation_07112024.pptx
+
+      - name: see folder
+        run: |
+          ls -lah
+          
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
