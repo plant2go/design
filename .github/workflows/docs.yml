@@ -10,8 +10,8 @@ permissions:
   contents: write
 
 jobs:
-  build:
-    name: Build & Publish 🚀
+  adoc:
+    name: convert adoc to html
     runs-on: ubuntu-22.04
     env:
       INPUTPATH: .
@@ -21,14 +21,6 @@ jobs:
     concurrency: ci-${{ github.ref }}
     steps:
       - uses: actions/checkout@v2
-
-  #
-
-  adoc:
-    name: convert adoc to html
-    runs-on: ubuntu-22.04
-    needs: build
-    steps:
       - name: Build main
         uses: quirinecker/asciidoctor-convert-action@main
         with:
@@ -39,8 +31,9 @@ jobs:
   presentation-template:
     name: convert Plant2Go_PresentationTemplate.pptx to PDF
     runs-on: ubuntu-22.04
-    needs: build
+    concurrency: ci-${{ github.ref }}
     steps:
+      - uses: actions/checkout@v2
       - name: convert Plant2Go_PresentationTemplate.pptx to PDF
         run: |
           sudo apt-get install unoconv
@@ -50,8 +43,9 @@ jobs:
   presentation07112024:
     name: convert Plant2Go_Presentation_07112024.pptx to PDF
     runs-on: ubuntu-22.04
-    needs: build
+    concurrency: ci-${{ github.ref }}
     steps:
+      - uses: actions/checkout@v2
       - name: convert Plant2Go_Presentation_07112024.pptx to PDF
         run: |
           sudo apt-get install unoconv
