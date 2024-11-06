@@ -10,15 +10,9 @@ permissions:
   contents: write
 
 jobs:
-  checkout:
-    name: Checkout
+  build:
+    name: Build & Publish
     runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v2
-  adoc:
-    name: convert adoc to html
-    runs-on: ubuntu-22.04
-    needs: checkout
     env:
       INPUTPATH: .
       OUTPUTPATH: .
@@ -26,51 +20,23 @@ jobs:
       BRANCH: gh-pages
     concurrency: ci-${{ github.ref }}
     steps:
+      - uses: actions/checkout@v2
       - name: Build main
         uses: quirinecker/asciidoctor-convert-action@main
         with:
           slides: ${{ env.SLIDES }}
           inputPath: ${{ env.INPUTPATH }}
           outputPath: ${{ env.OUTPUTPATH }}
-
-  presentation-template:
-    name: convert Plant2Go_PresentationTemplate.pptx to PDF
-    runs-on: ubuntu-22.04
-    concurrency: ci-${{ github.ref }}
-    needs: adoc
-    steps:
       - name: convert Plant2Go_PresentationTemplate.pptx to PDF
         run: |
           sudo apt-get install unoconv
           cd presentation-template
           unoconv -f pdf Plant2Go_PresentationTemplate.pptx
-
-  presentation07112024:
-    name: convert Plant2Go_Presentation_07112024.pptx to PDF
-    runs-on: ubuntu-22.04
-    concurrency: ci-${{ github.ref }}
-    needs: presentation-template
-    steps:
       - name: convert Plant2Go_Presentation_07112024.pptx to PDF
         run: |
           sudo apt-get install unoconv
           cd praesentation
           unoconv -f pdf Plant2Go_Presentation_07112024.pptx
-
-  deploy:
-    name: Deploy 🚀
-    runs-on: ubuntu-22.04
-    needs:
-      - adoc
-      - presentation-template
-      - presentation07112024
-    env:
-      INPUTPATH: .
-      OUTPUTPATH: .
-      SLIDES: false
-      BRANCH: gh-pages
-    concurrency: ci-${{ github.ref }}
-    steps:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
