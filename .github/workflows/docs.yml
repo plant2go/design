@@ -34,8 +34,8 @@ jobs:
           sudo apt-get install unoconv
           cd ./Presentation Template/
           unoconv -f pdf Plant2Go_PresentationTemplate.pptx
-          cd ../praesentation/
-          unoconv -f pdf Plant2Go_Presentation_07112024.pptx
+#          cd ../praesentation/
+#          unoconv -f pdf Plant2Go_Presentation_07112024.pptx
 
       - name: see folder
         run: |
