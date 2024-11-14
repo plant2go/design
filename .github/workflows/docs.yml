@@ -27,21 +27,10 @@ jobs:
           slides: ${{ env.SLIDES }}
           inputPath: ${{ env.INPUTPATH }}
           outputPath: ${{ env.OUTPUTPATH }}
-      - name: convert Plant2Go_PresentationTemplate.pptx to PDF
+      - name: convert pptx usw to PDF
         run: |
-          sudo apt-get install unoconv
-          cd presentation-template
-          unoconv -f pdf Plant2Go_PresentationTemplate.pptx
-      - name: convert Plant2Go_Presentation_07112024.pptx to PDF
-        run: |
-          sudo apt-get install unoconv
-          cd praesentation
-          unoconv -f pdf Plant2Go_Presentation_07112024.pptx
-      - name: convert Plant2Godesign_protkoll.docx to PDF
-        run: |
-          sudo apt-get install unoconv
-          cd dokumentation-logoerstellung
-          unoconv -f pdf Plant2Godesign_protkoll.docx
+          chmod +x convert_to_pdf.sh
+          ./convert_to_pdf.sh .
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
